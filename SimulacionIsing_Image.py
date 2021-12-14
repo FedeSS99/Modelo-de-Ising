@@ -7,25 +7,22 @@ from IsingRutinas import EvolucionIsingCy
 
 #Declaramos las constantes que definen el sistema así como las temperaturas
 #a someter al sistema de atomos
-N = 300
-T = 0.01
+Nx, Ny = 600, 300
+T = 0.1
 
 #Creamos el arreglo cuadrado de configuracion de spines asi como el calculo
 #de su energía total inicial asi como su magnetizacion
-Spines = np.random.choice([-1,1], size=(N,N)).astype(np.float64)
+Spines = np.random.choice([-1,1], size=(Nx,Ny)).astype(np.float64)
 
 #Creamos la ventana del widget GraphicsView
 pg.setConfigOption('background', "k")
 pg.setConfigOption('foreground', "w")
-ventana = pg.GraphicsLayoutWidget(size=(700,700))
+ventana = pg.GraphicsLayoutWidget(size=(1300,700))
 
 ventana.setWindowTitle(f"Simulación de modelo de Ising, FPS=0, T={T:.2f}")
 vista = ventana.addPlot(row=0, col=0, rowspan=2)
 vista.hideAxis("bottom")
 vista.hideAxis("left")
-vista.setMouseEnabled( x=False, y=False)
-vista.disableAutoRange()
-vista.hideButtons()
 
 cm = pg.colormap.get(name="hsv", source="matplotlib")
 bar =pg.ColorBarItem(values=(-2, 2), colorMap=cm)
@@ -39,7 +36,7 @@ material = pg.ImageItem(border="k")
 vista.addItem(material)
 
 #Fijamos dimensiones visuales iniciales
-vista.setRange(QtCore.QRectF(0,0, N, N))
+vista.setRange(QtCore.QRectF(0,0, Nx, Ny))
 
 #Fijamos el estado inicial
 material.setImage(Spines)
@@ -57,9 +54,10 @@ timer = QtCore.QTimer()
 timer.setSingleShot(True)
 
 def ActualizarSpines():
-    global T, iter, transcurrido, TiempoActualizar
+    global T, Spines, iter, transcurrido, TiempoActualizar
 
-    EvolucionIsingCy(Spines, T)
+    SpinesCopia = np.copy(Spines)
+    EvolucionIsingCy(Spines, SpinesCopia, T)
     bar.setImageItem(material)
 
     timer.start()

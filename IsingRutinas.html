@@ -309,24 +309,27 @@ body.cython { font-family: courier; font-size: 12; }
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_np, __pyx_t_1) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 5, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">06</span>: cimport numpy as np</pre>
-<pre class="cython line score-0">&#xA0;<span class="">07</span>: ctypedef np.float64_t dtype_t</pre>
-<pre class="cython line score-0">&#xA0;<span class="">08</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">09</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">10</span>: from libc.math cimport exp</pre>
-<pre class="cython line score-0">&#xA0;<span class="">11</span>: from libc.stdlib cimport rand</pre>
-<pre class="cython line score-0">&#xA0;<span class="">12</span>: cdef extern from 'limits.h':</pre>
-<pre class="cython line score-0">&#xA0;<span class="">13</span>:     int RAND_MAX</pre>
-<pre class="cython line score-0">&#xA0;<span class="">14</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">15</span>: @cython.boundscheck(False)</pre>
-<pre class="cython line score-0">&#xA0;<span class="">16</span>: @cython.wraparound(False)</pre>
-<pre class="cython line score-0">&#xA0;<span class="">17</span>: @cython.nonecheck(False)</pre>
-<pre class="cython line score-0">&#xA0;<span class="">18</span>: @cython.profile(False)</pre>
-<pre class="cython line score-0">&#xA0;<span class="">19</span>: @cython.cdivision(False)</pre>
-<pre class="cython line score-13" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">20</span>: cdef EvaluacionSpinesArreglo(np.ndarray[dtype_t, ndim=2] spines,dtype_t T):</pre>
-<pre class='cython code score-13 '>static PyObject *__pyx_f_12IsingRutinas_EvaluacionSpinesArreglo(PyArrayObject *__pyx_v_spines, __pyx_t_12IsingRutinas_dtype_t __pyx_v_T) {
-  __pyx_t_5numpy_float64_t __pyx_v_total_energia;
-  __pyx_t_5numpy_float64_t __pyx_v_dE;
-  int __pyx_v_N;
+<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">07</span>: np.import_array()</pre>
+<pre class='cython code score-0 '>  __pyx_t_2 = __pyx_f_5numpy_import_array();<span class='error_goto'> if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 7, __pyx_L1_error)</span>
+</pre><pre class="cython line score-0">&#xA0;<span class="">08</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">09</span>: ctypedef np.float64_t dtype_t</pre>
+<pre class="cython line score-0">&#xA0;<span class="">10</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">11</span>: from libc.math cimport exp</pre>
+<pre class="cython line score-0">&#xA0;<span class="">12</span>: from libc.stdlib cimport rand</pre>
+<pre class="cython line score-0">&#xA0;<span class="">13</span>: cdef extern from 'limits.h':</pre>
+<pre class="cython line score-0">&#xA0;<span class="">14</span>:     int RAND_MAX</pre>
+<pre class="cython line score-0">&#xA0;<span class="">15</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">16</span>: @cython.boundscheck(False)</pre>
+<pre class="cython line score-0">&#xA0;<span class="">17</span>: @cython.wraparound(False)</pre>
+<pre class="cython line score-0">&#xA0;<span class="">18</span>: @cython.nonecheck(False)</pre>
+<pre class="cython line score-0">&#xA0;<span class="">19</span>: @cython.profile(False)</pre>
+<pre class="cython line score-0">&#xA0;<span class="">20</span>: @cython.cdivision(True)</pre>
+<pre class="cython line score-19" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">21</span>: cdef EvaluacionSpinesArreglo(np.ndarray[dtype_t, ndim=2] spines, np.ndarray[dtype_t, ndim=2] spinesCopia, dtype_t T):</pre>
+<pre class='cython code score-19 '>static PyObject *__pyx_f_12IsingRutinas_EvaluacionSpinesArreglo(PyArrayObject *__pyx_v_spines, PyArrayObject *__pyx_v_spinesCopia, __pyx_t_12IsingRutinas_dtype_t __pyx_v_T) {
+  __pyx_t_12IsingRutinas_dtype_t __pyx_v_dE;
+  __pyx_t_12IsingRutinas_dtype_t __pyx_v_SpinVecinos;
+  int __pyx_v_Nx;
+  int __pyx_v_Ny;
   CYTHON_UNUSED int __pyx_v_i;
   CYTHON_UNUSED int __pyx_v_j;
   int __pyx_v_iRandom;
@@ -337,6 +340,8 @@ body.cython { font-family: courier; font-size: 12; }
   int __pyx_v_j2;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_spines;
   __Pyx_Buffer __pyx_pybuffer_spines;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_spinesCopia;
+  __Pyx_Buffer __pyx_pybuffer_spinesCopia;
   PyObject *__pyx_r = NULL;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("EvaluacionSpinesArreglo", 0);
@@ -344,11 +349,20 @@ body.cython { font-family: courier; font-size: 12; }
   __pyx_pybuffer_spines.refcount = 0;
   __pyx_pybuffernd_spines.data = NULL;
   __pyx_pybuffernd_spines.rcbuffer = &amp;__pyx_pybuffer_spines;
+  __pyx_pybuffer_spinesCopia.pybuffer.buf = NULL;
+  __pyx_pybuffer_spinesCopia.refcount = 0;
+  __pyx_pybuffernd_spinesCopia.data = NULL;
+  __pyx_pybuffernd_spinesCopia.rcbuffer = &amp;__pyx_pybuffer_spinesCopia;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(<span class='pyx_c_api'>__Pyx_GetBufferAndValidate</span>(&amp;__pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer, (PyObject*)__pyx_v_spines, &amp;__Pyx_TypeInfo_nn___pyx_t_12IsingRutinas_dtype_t, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 2, 0, __pyx_stack) == -1)) <span class='error_goto'>__PYX_ERR(0, 20, __pyx_L1_error)</span>
+    if (unlikely(<span class='pyx_c_api'>__Pyx_GetBufferAndValidate</span>(&amp;__pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer, (PyObject*)__pyx_v_spines, &amp;__Pyx_TypeInfo_nn___pyx_t_12IsingRutinas_dtype_t, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 2, 0, __pyx_stack) == -1)) <span class='error_goto'>__PYX_ERR(0, 21, __pyx_L1_error)</span>
   }
   __pyx_pybuffernd_spines.diminfo[0].strides = __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.strides[0]; __pyx_pybuffernd_spines.diminfo[0].shape = __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.shape[0]; __pyx_pybuffernd_spines.diminfo[1].strides = __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.strides[1]; __pyx_pybuffernd_spines.diminfo[1].shape = __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.shape[1];
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(<span class='pyx_c_api'>__Pyx_GetBufferAndValidate</span>(&amp;__pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer, (PyObject*)__pyx_v_spinesCopia, &amp;__Pyx_TypeInfo_nn___pyx_t_12IsingRutinas_dtype_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) <span class='error_goto'>__PYX_ERR(0, 21, __pyx_L1_error)</span>
+  }
+  __pyx_pybuffernd_spinesCopia.diminfo[0].strides = __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.strides[0]; __pyx_pybuffernd_spinesCopia.diminfo[0].shape = __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.shape[0]; __pyx_pybuffernd_spinesCopia.diminfo[1].strides = __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.strides[1]; __pyx_pybuffernd_spinesCopia.diminfo[1].shape = __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.shape[1];
 /* … */
   /* function exit code */
   __pyx_r = Py_None; <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
@@ -359,149 +373,142 @@ body.cython { font-family: courier; font-size: 12; }
     __Pyx_PyThreadState_assign
     <span class='pyx_c_api'>__Pyx_ErrFetch</span>(&amp;__pyx_type, &amp;__pyx_value, &amp;__pyx_tb);
     <span class='pyx_c_api'>__Pyx_SafeReleaseBuffer</span>(&amp;__pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer);
+    <span class='pyx_c_api'>__Pyx_SafeReleaseBuffer</span>(&amp;__pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer);
   <span class='pyx_c_api'>__Pyx_ErrRestore</span>(__pyx_type, __pyx_value, __pyx_tb);}
   <span class='pyx_c_api'>__Pyx_AddTraceback</span>("IsingRutinas.EvaluacionSpinesArreglo", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   goto __pyx_L2;
   __pyx_L0:;
   <span class='pyx_c_api'>__Pyx_SafeReleaseBuffer</span>(&amp;__pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer);
+  <span class='pyx_c_api'>__Pyx_SafeReleaseBuffer</span>(&amp;__pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer);
   __pyx_L2:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
-</pre><pre class="cython line score-0">&#xA0;<span class="">21</span>:     cdef np.float64_t total_energia, dE</pre>
-<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">22</span>:     cdef int N = spines.shape[0]</pre>
-<pre class='cython code score-0 '>  __pyx_v_N = (__pyx_v_spines-&gt;dimensions[0]);
-</pre><pre class="cython line score-0">&#xA0;<span class="">23</span>:     cdef int i,j, iRandom, jRandom</pre>
-<pre class="cython line score-0">&#xA0;<span class="">24</span>:     cdef int i1, i2, j1, j2</pre>
-<pre class="cython line score-0">&#xA0;<span class="">25</span>: </pre>
-<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">26</span>:     for i in range(N):</pre>
-<pre class='cython code score-0 '>  __pyx_t_1 = __pyx_v_N;
+</pre><pre class="cython line score-0">&#xA0;<span class="">22</span>:     cdef dtype_t dE, SpinVecinos</pre>
+<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">23</span>:     cdef int Nx = &lt;int&gt;spines.shape[0]</pre>
+<pre class='cython code score-0 '>  __pyx_v_Nx = ((int)(__pyx_v_spines-&gt;dimensions[0]));
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">24</span>:     cdef int Ny = &lt;int&gt;spines.shape[1]</pre>
+<pre class='cython code score-0 '>  __pyx_v_Ny = ((int)(__pyx_v_spines-&gt;dimensions[1]));
+</pre><pre class="cython line score-0">&#xA0;<span class="">25</span>:     cdef int i,j, iRandom, jRandom</pre>
+<pre class="cython line score-0">&#xA0;<span class="">26</span>:     cdef int i1, i2, j1, j2</pre>
+<pre class="cython line score-0">&#xA0;<span class="">27</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">28</span>:     #Iniciamos un doble ciclo for en el cual seleccionamos Nx*Ny celdas aleatorias del arreglo</pre>
+<pre class="cython line score-0">&#xA0;<span class="">29</span>:     #para calcular su nuevo estado de espin</pre>
+<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">30</span>:     for i in range(Nx):</pre>
+<pre class='cython code score-0 '>  __pyx_t_1 = __pyx_v_Nx;
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 &lt; __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
-</pre><pre class="cython line score-5" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">27</span>:         iRandom = rand()%N</pre>
-<pre class='cython code score-5 '>    __pyx_t_4 = rand();
-    if (unlikely(__pyx_v_N == 0)) {
-      <span class='py_c_api'>PyErr_SetString</span>(PyExc_ZeroDivisionError, "integer division or modulo by zero");
-      <span class='error_goto'>__PYX_ERR(0, 27, __pyx_L1_error)</span>
-    }
-    __pyx_v_iRandom = __Pyx_mod_int(__pyx_t_4, __pyx_v_N);
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">28</span>:         i1 = iRandom+1</pre>
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">31</span>:         iRandom = rand()%Nx</pre>
+<pre class='cython code score-0 '>    __pyx_v_iRandom = (rand() % __pyx_v_Nx);
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">32</span>:         i1 = iRandom+1</pre>
 <pre class='cython code score-0 '>    __pyx_v_i1 = (__pyx_v_iRandom + 1);
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">29</span>:         i2 = iRandom-1</pre>
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">33</span>:         i2 = iRandom-1</pre>
 <pre class='cython code score-0 '>    __pyx_v_i2 = (__pyx_v_iRandom - 1);
-</pre><pre class="cython line score-0">&#xA0;<span class="">30</span>: </pre>
-<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">31</span>:         if i1 == N:</pre>
-<pre class='cython code score-0 '>    __pyx_t_5 = ((__pyx_v_i1 == __pyx_v_N) != 0);
-    if (__pyx_t_5) {
+</pre><pre class="cython line score-0">&#xA0;<span class="">34</span>: </pre>
+<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">35</span>:         if i1 == Nx:</pre>
+<pre class='cython code score-0 '>    __pyx_t_4 = ((__pyx_v_i1 == __pyx_v_Nx) != 0);
+    if (__pyx_t_4) {
 /* … */
     }
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">32</span>:             i1 = 0</pre>
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">36</span>:             i1 = 0</pre>
 <pre class='cython code score-0 '>      __pyx_v_i1 = 0;
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">33</span>:         if i2 == -1:</pre>
-<pre class='cython code score-0 '>    __pyx_t_5 = ((__pyx_v_i2 == -1L) != 0);
-    if (__pyx_t_5) {
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">37</span>:         if i2 == -1:</pre>
+<pre class='cython code score-0 '>    __pyx_t_4 = ((__pyx_v_i2 == -1L) != 0);
+    if (__pyx_t_4) {
 /* … */
     }
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">34</span>:             i2 = N-1</pre>
-<pre class='cython code score-0 '>      __pyx_v_i2 = (__pyx_v_N - 1);
-</pre><pre class="cython line score-0">&#xA0;<span class="">35</span>: </pre>
-<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">36</span>:         for j in range(N):</pre>
-<pre class='cython code score-0 '>    __pyx_t_4 = __pyx_v_N;
-    __pyx_t_6 = __pyx_t_4;
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">38</span>:             i2 = Nx-1</pre>
+<pre class='cython code score-0 '>      __pyx_v_i2 = (__pyx_v_Nx - 1);
+</pre><pre class="cython line score-0">&#xA0;<span class="">39</span>: </pre>
+<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">40</span>:         for j in range(Ny):</pre>
+<pre class='cython code score-0 '>    __pyx_t_5 = __pyx_v_Ny;
+    __pyx_t_6 = __pyx_t_5;
     for (__pyx_t_7 = 0; __pyx_t_7 &lt; __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_j = __pyx_t_7;
-</pre><pre class="cython line score-5" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">37</span>:             jRandom = rand()%N</pre>
-<pre class='cython code score-5 '>      __pyx_t_8 = rand();
-      if (unlikely(__pyx_v_N == 0)) {
-        <span class='py_c_api'>PyErr_SetString</span>(PyExc_ZeroDivisionError, "integer division or modulo by zero");
-        <span class='error_goto'>__PYX_ERR(0, 37, __pyx_L1_error)</span>
-      }
-      __pyx_v_jRandom = __Pyx_mod_int(__pyx_t_8, __pyx_v_N);
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">38</span>:             j1 = jRandom+1</pre>
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">41</span>:             jRandom = rand()%Ny</pre>
+<pre class='cython code score-0 '>      __pyx_v_jRandom = (rand() % __pyx_v_Ny);
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">42</span>:             j1 = jRandom+1</pre>
 <pre class='cython code score-0 '>      __pyx_v_j1 = (__pyx_v_jRandom + 1);
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">39</span>:             j2 = jRandom-1</pre>
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">43</span>:             j2 = jRandom-1</pre>
 <pre class='cython code score-0 '>      __pyx_v_j2 = (__pyx_v_jRandom - 1);
-</pre><pre class="cython line score-0">&#xA0;<span class="">40</span>: </pre>
-<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">41</span>:             if j1 == N:</pre>
-<pre class='cython code score-0 '>      __pyx_t_5 = ((__pyx_v_j1 == __pyx_v_N) != 0);
-      if (__pyx_t_5) {
+</pre><pre class="cython line score-0">&#xA0;<span class="">44</span>: </pre>
+<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">45</span>:             if j1 == Ny:</pre>
+<pre class='cython code score-0 '>      __pyx_t_4 = ((__pyx_v_j1 == __pyx_v_Ny) != 0);
+      if (__pyx_t_4) {
 /* … */
       }
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">42</span>:                 j1 = 0</pre>
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">46</span>:                 j1 = 0</pre>
 <pre class='cython code score-0 '>        __pyx_v_j1 = 0;
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">43</span>:             if j2 == -1:</pre>
-<pre class='cython code score-0 '>      __pyx_t_5 = ((__pyx_v_j2 == -1L) != 0);
-      if (__pyx_t_5) {
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">47</span>:             if j2 == -1:</pre>
+<pre class='cython code score-0 '>      __pyx_t_4 = ((__pyx_v_j2 == -1L) != 0);
+      if (__pyx_t_4) {
 /* … */
       }
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">44</span>:                 j2 = N-1</pre>
-<pre class='cython code score-0 '>        __pyx_v_j2 = (__pyx_v_N - 1);
-</pre><pre class="cython line score-0">&#xA0;<span class="">45</span>: </pre>
-<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">46</span>:             total_energia = spines[i1,jRandom]+spines[i2,jRandom]+spines[iRandom,j1]+spines[iRandom,j2]</pre>
-<pre class='cython code score-0 '>      __pyx_t_9 = __pyx_v_i1;
-      __pyx_t_10 = __pyx_v_jRandom;
-      __pyx_t_11 = __pyx_v_i2;
-      __pyx_t_12 = __pyx_v_jRandom;
-      __pyx_t_13 = __pyx_v_iRandom;
-      __pyx_t_14 = __pyx_v_j1;
-      __pyx_t_15 = __pyx_v_iRandom;
-      __pyx_t_16 = __pyx_v_j2;
-      __pyx_v_total_energia = ((((*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_spines.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_spines.diminfo[1].strides)) + (*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.buf, __pyx_t_11, __pyx_pybuffernd_spines.diminfo[0].strides, __pyx_t_12, __pyx_pybuffernd_spines.diminfo[1].strides))) + (*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.buf, __pyx_t_13, __pyx_pybuffernd_spines.diminfo[0].strides, __pyx_t_14, __pyx_pybuffernd_spines.diminfo[1].strides))) + (*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_spines.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_spines.diminfo[1].strides)));
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">47</span>:             dE = 2.0 * spines[iRandom, jRandom] * total_energia</pre>
-<pre class='cython code score-0 '>      __pyx_t_16 = __pyx_v_iRandom;
-      __pyx_t_15 = __pyx_v_jRandom;
-      __pyx_v_dE = ((2.0 * (*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.buf, __pyx_t_16, __pyx_pybuffernd_spines.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_spines.diminfo[1].strides))) * __pyx_v_total_energia);
-</pre><pre class="cython line score-10" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">48</span>:             if exp(-dE / T) &gt; rand()/(RAND_MAX) or dE&lt;0:</pre>
-<pre class='cython code score-10 '>      __pyx_t_17 = (-__pyx_v_dE);
-      if (unlikely(__pyx_v_T == 0)) {
-        <span class='py_c_api'>PyErr_SetString</span>(PyExc_ZeroDivisionError, "float division");
-        <span class='error_goto'>__PYX_ERR(0, 48, __pyx_L1_error)</span>
-      }
-      __pyx_t_8 = rand();
-      if (unlikely(RAND_MAX == 0)) {
-        <span class='py_c_api'>PyErr_SetString</span>(PyExc_ZeroDivisionError, "float division");
-        <span class='error_goto'>__PYX_ERR(0, 48, __pyx_L1_error)</span>
-      }
-      __pyx_t_18 = ((exp((((__pyx_t_12IsingRutinas_dtype_t)__pyx_t_17) / __pyx_v_T)) &gt; (((double)__pyx_t_8) / ((double)RAND_MAX))) != 0);
-      if (!__pyx_t_18) {
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">48</span>:                 j2 = Ny-1</pre>
+<pre class='cython code score-0 '>        __pyx_v_j2 = (__pyx_v_Ny - 1);
+</pre><pre class="cython line score-0">&#xA0;<span class="">49</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">50</span>:             #Evaluamo la suma de espines alrededor de la celda elegida y la diferencia de energia de la misma</pre>
+<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">51</span>:             SpinVecinos = spinesCopia[i1,jRandom]+spinesCopia[i2,jRandom]+spinesCopia[iRandom,j1]+spinesCopia[iRandom,j2]</pre>
+<pre class='cython code score-0 '>      __pyx_t_8 = __pyx_v_i1;
+      __pyx_t_9 = __pyx_v_jRandom;
+      __pyx_t_10 = __pyx_v_i2;
+      __pyx_t_11 = __pyx_v_jRandom;
+      __pyx_t_12 = __pyx_v_iRandom;
+      __pyx_t_13 = __pyx_v_j1;
+      __pyx_t_14 = __pyx_v_iRandom;
+      __pyx_t_15 = __pyx_v_j2;
+      __pyx_v_SpinVecinos = ((((*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_spinesCopia.diminfo[0].strides, __pyx_t_9, __pyx_pybuffernd_spinesCopia.diminfo[1].strides)) + (*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_spinesCopia.diminfo[0].strides, __pyx_t_11, __pyx_pybuffernd_spinesCopia.diminfo[1].strides))) + (*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_spinesCopia.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_spinesCopia.diminfo[1].strides))) + (*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.buf, __pyx_t_14, __pyx_pybuffernd_spinesCopia.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_spinesCopia.diminfo[1].strides)));
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">52</span>:             dE = 2.0 * spinesCopia[iRandom, jRandom] * SpinVecinos</pre>
+<pre class='cython code score-0 '>      __pyx_t_15 = __pyx_v_iRandom;
+      __pyx_t_14 = __pyx_v_jRandom;
+      __pyx_v_dE = ((2.0 * (*__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_spinesCopia.diminfo[0].strides, __pyx_t_14, __pyx_pybuffernd_spinesCopia.diminfo[1].strides))) * __pyx_v_SpinVecinos);
+</pre><pre class="cython line score-0">&#xA0;<span class="">53</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">54</span>:             #El cambio de estado sucede si la diferencia de energia es negativa</pre>
+<pre class="cython line score-0">&#xA0;<span class="">55</span>:             #o si un numero aleatorio entre 0 y 1 es mayor que el factor de Boltzmann</pre>
+<pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">56</span>:             if exp(-&lt;dtype_t&gt;dE /&lt;dtype_t&gt; T) &gt; &lt;dtype_t&gt;rand()/&lt;dtype_t&gt;RAND_MAX or dE&lt;0:</pre>
+<pre class='cython code score-0 '>      __pyx_t_16 = ((exp(((-((__pyx_t_12IsingRutinas_dtype_t)__pyx_v_dE)) / ((__pyx_t_12IsingRutinas_dtype_t)__pyx_v_T))) &gt; (((__pyx_t_12IsingRutinas_dtype_t)rand()) / ((__pyx_t_12IsingRutinas_dtype_t)RAND_MAX))) != 0);
+      if (!__pyx_t_16) {
       } else {
-        __pyx_t_5 = __pyx_t_18;
+        __pyx_t_4 = __pyx_t_16;
         goto __pyx_L12_bool_binop_done;
       }
-      __pyx_t_18 = ((__pyx_v_dE &lt; 0.0) != 0);
-      __pyx_t_5 = __pyx_t_18;
+      __pyx_t_16 = ((__pyx_v_dE &lt; 0.0) != 0);
+      __pyx_t_4 = __pyx_t_16;
       __pyx_L12_bool_binop_done:;
-      if (__pyx_t_5) {
+      if (__pyx_t_4) {
 /* … */
       }
     }
   }
-</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">49</span>:                 spines[iRandom,jRandom] *= -1</pre>
-<pre class='cython code score-0 '>        __pyx_t_15 = __pyx_v_iRandom;
-        __pyx_t_16 = __pyx_v_jRandom;
-        *__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_spines.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_spines.diminfo[1].strides) *= -1.0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">50</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">51</span>: </pre>
-<pre class="cython line score-61" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">52</span>: def EvolucionIsingCy(np.ndarray[dtype_t, ndim=2] spines,dtype_t T):</pre>
-<pre class='cython code score-61 '>/* Python wrapper */
+</pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">57</span>:                 spines[iRandom,jRandom] *= -1</pre>
+<pre class='cython code score-0 '>        __pyx_t_14 = __pyx_v_iRandom;
+        __pyx_t_15 = __pyx_v_jRandom;
+        *__Pyx_BufPtrStrided2d(__pyx_t_12IsingRutinas_dtype_t *, __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.buf, __pyx_t_14, __pyx_pybuffernd_spines.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_spines.diminfo[1].strides) *= -1.0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">58</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">59</span>: </pre>
+<pre class="cython line score-75" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">60</span>: def EvolucionIsingCy(np.ndarray[dtype_t, ndim=2] spines, np.ndarray[dtype_t, ndim=2] spinesCopia, dtype_t T):</pre>
+<pre class='cython code score-75 '>/* Python wrapper */
 static PyObject *__pyx_pw_12IsingRutinas_1EvolucionIsingCy(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyMethodDef __pyx_mdef_12IsingRutinas_1EvolucionIsingCy = {"EvolucionIsingCy", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_12IsingRutinas_1EvolucionIsingCy, METH_VARARGS|METH_KEYWORDS, 0};
 static PyObject *__pyx_pw_12IsingRutinas_1EvolucionIsingCy(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyArrayObject *__pyx_v_spines = 0;
+  PyArrayObject *__pyx_v_spinesCopia = 0;
   __pyx_t_12IsingRutinas_dtype_t __pyx_v_T;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("EvolucionIsingCy (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&amp;__pyx_n_s_spines,&amp;__pyx_n_s_T,0};
-    PyObject* values[2] = {0,0};
+    static PyObject **__pyx_pyargnames[] = {&amp;__pyx_n_s_spines,&amp;__pyx_n_s_spinesCopia,&amp;__pyx_n_s_T,0};
+    PyObject* values[3] = {0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
       switch (pos_args) {
+        case  3: values[2] = <span class='py_macro_api'>PyTuple_GET_ITEM</span>(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
         case  2: values[1] = <span class='py_macro_api'>PyTuple_GET_ITEM</span>(__pyx_args, 1);
         CYTHON_FALLTHROUGH;
         case  1: values[0] = <span class='py_macro_api'>PyTuple_GET_ITEM</span>(__pyx_args, 0);
@@ -516,33 +523,42 @@ static PyObject *__pyx_pw_12IsingRutinas_1EvolucionIsingCy(PyObject *__pyx_self,
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = <span class='pyx_c_api'>__Pyx_PyDict_GetItemStr</span>(__pyx_kwds, __pyx_n_s_T)) != 0)) kw_args--;
+        if (likely((values[1] = <span class='pyx_c_api'>__Pyx_PyDict_GetItemStr</span>(__pyx_kwds, __pyx_n_s_spinesCopia)) != 0)) kw_args--;
         else {
-          <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("EvolucionIsingCy", 1, 2, 2, 1); <span class='error_goto'>__PYX_ERR(0, 52, __pyx_L3_error)</span>
+          <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("EvolucionIsingCy", 1, 3, 3, 1); <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L3_error)</span>
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = <span class='pyx_c_api'>__Pyx_PyDict_GetItemStr</span>(__pyx_kwds, __pyx_n_s_T)) != 0)) kw_args--;
+        else {
+          <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("EvolucionIsingCy", 1, 3, 3, 2); <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L3_error)</span>
         }
       }
       if (unlikely(kw_args &gt; 0)) {
-        if (unlikely(<span class='pyx_c_api'>__Pyx_ParseOptionalKeywords</span>(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "EvolucionIsingCy") &lt; 0)) <span class='error_goto'>__PYX_ERR(0, 52, __pyx_L3_error)</span>
+        if (unlikely(<span class='pyx_c_api'>__Pyx_ParseOptionalKeywords</span>(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "EvolucionIsingCy") &lt; 0)) <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L3_error)</span>
       }
-    } else if (<span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args) != 2) {
+    } else if (<span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = <span class='py_macro_api'>PyTuple_GET_ITEM</span>(__pyx_args, 0);
       values[1] = <span class='py_macro_api'>PyTuple_GET_ITEM</span>(__pyx_args, 1);
+      values[2] = <span class='py_macro_api'>PyTuple_GET_ITEM</span>(__pyx_args, 2);
     }
     __pyx_v_spines = ((PyArrayObject *)values[0]);
-    __pyx_v_T = __pyx_<span class='py_c_api'>PyFloat_AsDouble</span>(values[1]); if (unlikely((__pyx_v_T == ((npy_float64)-1)) &amp;&amp; <span class='py_c_api'>PyErr_Occurred</span>())) <span class='error_goto'>__PYX_ERR(0, 52, __pyx_L3_error)</span>
+    __pyx_v_spinesCopia = ((PyArrayObject *)values[1]);
+    __pyx_v_T = __pyx_<span class='py_c_api'>PyFloat_AsDouble</span>(values[2]); if (unlikely((__pyx_v_T == ((npy_float64)-1)) &amp;&amp; <span class='py_c_api'>PyErr_Occurred</span>())) <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L3_error)</span>
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("EvolucionIsingCy", 1, 2, 2, <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args)); <span class='error_goto'>__PYX_ERR(0, 52, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("EvolucionIsingCy", 1, 3, 3, <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args)); <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L3_error)</span>
   __pyx_L3_error:;
   <span class='pyx_c_api'>__Pyx_AddTraceback</span>("IsingRutinas.EvolucionIsingCy", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_spines), __pyx_ptype_5numpy_ndarray, 1, "spines", 0))) <span class='error_goto'>__PYX_ERR(0, 52, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_12IsingRutinas_EvolucionIsingCy(__pyx_self, __pyx_v_spines, __pyx_v_T);
+  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_spines), __pyx_ptype_5numpy_ndarray, 1, "spines", 0))) <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L1_error)</span>
+  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_spinesCopia), __pyx_ptype_5numpy_ndarray, 1, "spinesCopia", 0))) <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L1_error)</span>
+  __pyx_r = __pyx_pf_12IsingRutinas_EvolucionIsingCy(__pyx_self, __pyx_v_spines, __pyx_v_spinesCopia, __pyx_v_T);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -556,9 +572,11 @@ static PyObject *__pyx_pw_12IsingRutinas_1EvolucionIsingCy(PyObject *__pyx_self,
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_12IsingRutinas_EvolucionIsingCy(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_spines, __pyx_t_12IsingRutinas_dtype_t __pyx_v_T) {
+static PyObject *__pyx_pf_12IsingRutinas_EvolucionIsingCy(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_spines, PyArrayObject *__pyx_v_spinesCopia, __pyx_t_12IsingRutinas_dtype_t __pyx_v_T) {
   __Pyx_LocalBuf_ND __pyx_pybuffernd_spines;
   __Pyx_Buffer __pyx_pybuffer_spines;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_spinesCopia;
+  __Pyx_Buffer __pyx_pybuffer_spinesCopia;
   PyObject *__pyx_r = NULL;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("EvolucionIsingCy", 0);
@@ -566,11 +584,20 @@ static PyObject *__pyx_pf_12IsingRutinas_EvolucionIsingCy(CYTHON_UNUSED PyObject
   __pyx_pybuffer_spines.refcount = 0;
   __pyx_pybuffernd_spines.data = NULL;
   __pyx_pybuffernd_spines.rcbuffer = &amp;__pyx_pybuffer_spines;
+  __pyx_pybuffer_spinesCopia.pybuffer.buf = NULL;
+  __pyx_pybuffer_spinesCopia.refcount = 0;
+  __pyx_pybuffernd_spinesCopia.data = NULL;
+  __pyx_pybuffernd_spinesCopia.rcbuffer = &amp;__pyx_pybuffer_spinesCopia;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(<span class='pyx_c_api'>__Pyx_GetBufferAndValidate</span>(&amp;__pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer, (PyObject*)__pyx_v_spines, &amp;__Pyx_TypeInfo_nn___pyx_t_12IsingRutinas_dtype_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) <span class='error_goto'>__PYX_ERR(0, 52, __pyx_L1_error)</span>
+    if (unlikely(<span class='pyx_c_api'>__Pyx_GetBufferAndValidate</span>(&amp;__pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer, (PyObject*)__pyx_v_spines, &amp;__Pyx_TypeInfo_nn___pyx_t_12IsingRutinas_dtype_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L1_error)</span>
   }
   __pyx_pybuffernd_spines.diminfo[0].strides = __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.strides[0]; __pyx_pybuffernd_spines.diminfo[0].shape = __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.shape[0]; __pyx_pybuffernd_spines.diminfo[1].strides = __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.strides[1]; __pyx_pybuffernd_spines.diminfo[1].shape = __pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer.shape[1];
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(<span class='pyx_c_api'>__Pyx_GetBufferAndValidate</span>(&amp;__pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer, (PyObject*)__pyx_v_spinesCopia, &amp;__Pyx_TypeInfo_nn___pyx_t_12IsingRutinas_dtype_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L1_error)</span>
+  }
+  __pyx_pybuffernd_spinesCopia.diminfo[0].strides = __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.strides[0]; __pyx_pybuffernd_spinesCopia.diminfo[0].shape = __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.shape[0]; __pyx_pybuffernd_spinesCopia.diminfo[1].strides = __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.strides[1]; __pyx_pybuffernd_spinesCopia.diminfo[1].shape = __pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer.shape[1];
 /* … */
   /* function exit code */
   __pyx_r = Py_None; <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
@@ -582,28 +609,30 @@ static PyObject *__pyx_pf_12IsingRutinas_EvolucionIsingCy(CYTHON_UNUSED PyObject
     __Pyx_PyThreadState_assign
     <span class='pyx_c_api'>__Pyx_ErrFetch</span>(&amp;__pyx_type, &amp;__pyx_value, &amp;__pyx_tb);
     <span class='pyx_c_api'>__Pyx_SafeReleaseBuffer</span>(&amp;__pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer);
+    <span class='pyx_c_api'>__Pyx_SafeReleaseBuffer</span>(&amp;__pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer);
   <span class='pyx_c_api'>__Pyx_ErrRestore</span>(__pyx_type, __pyx_value, __pyx_tb);}
   <span class='pyx_c_api'>__Pyx_AddTraceback</span>("IsingRutinas.EvolucionIsingCy", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   goto __pyx_L2;
   __pyx_L0:;
   <span class='pyx_c_api'>__Pyx_SafeReleaseBuffer</span>(&amp;__pyx_pybuffernd_spines.rcbuffer-&gt;pybuffer);
+  <span class='pyx_c_api'>__Pyx_SafeReleaseBuffer</span>(&amp;__pyx_pybuffernd_spinesCopia.rcbuffer-&gt;pybuffer);
   __pyx_L2:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 /* … */
-  __pyx_tuple__3 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_spines, __pyx_n_s_T);<span class='error_goto'> if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 52, __pyx_L1_error)</span>
+  __pyx_tuple__3 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_n_s_spines, __pyx_n_s_spinesCopia, __pyx_n_s_T);<span class='error_goto'> if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 60, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__3);
   <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__3);
 /* … */
-  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_12IsingRutinas_1EvolucionIsingCy, NULL, __pyx_n_s_IsingRutinas);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)</span>
+  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_12IsingRutinas_1EvolucionIsingCy, NULL, __pyx_n_s_IsingRutinas);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_EvolucionIsingCy, __pyx_t_1) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 52, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_EvolucionIsingCy, __pyx_t_1) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 60, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-</pre><pre class="cython line score-1" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">53</span>:     EvaluacionSpinesArreglo(spines, T)</pre>
-<pre class='cython code score-1 '>  __pyx_t_1 = __pyx_f_12IsingRutinas_EvaluacionSpinesArreglo(((PyArrayObject *)__pyx_v_spines), __pyx_v_T);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)</span>
+</pre><pre class="cython line score-1" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">61</span>:     EvaluacionSpinesArreglo(spines, spinesCopia, T)</pre>
+<pre class='cython code score-1 '>  __pyx_t_1 = __pyx_f_12IsingRutinas_EvaluacionSpinesArreglo(((PyArrayObject *)__pyx_v_spines), ((PyArrayObject *)__pyx_v_spinesCopia), __pyx_v_T);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
 </pre></div></body></html>
