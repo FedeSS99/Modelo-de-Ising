@@ -1,9 +1,11 @@
-from distutils.core import setup
-from distutils.extension import Extension
-from Cython.Distutils import build_ext
+from numpy.lib.utils import get_include
+from setuptools import setup
+from Cython.Build import cythonize
 import numpy
 
-ext = Extension("CalculosIsing", ["IsingRutinas.pyx"],
-                include_dirs = [numpy.get_include()])
-
-setup(ext_modules=[ext], cmdclass={"build_ext": build_ext})
+setup(
+    name="IsingRutinas",
+    ext_modules=cythonize("IsingRutinas.pyx", annotate=True),
+    include_dirs=[numpy.get_include()],
+    zip_safe=False
+)

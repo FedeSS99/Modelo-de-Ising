@@ -3,14 +3,15 @@ import pyqtgraph as pg
 import numpy as np
 from time import perf_counter
 
-from CalculosIsing import EvolucionIsingCy
+from IsingRutinas import EvolucionIsingCy
 
 #Declaramos las constantes que definen el sistema así como las temperaturas
 #a someter al sistema de atomos
-N = 200
+N = 300
 T = 0.01
 Tmax = 3.01
-Pasos = 2000
+Pasos = 3000
+maxPasosRelax = 800
 dT = (Tmax-T)/Pasos
 
 iterMin, iterMax = -2, 2
@@ -18,8 +19,20 @@ iterMin, iterMax = -2, 2
 #Creamos el arreglo cuadrado de configuracion de spines asi como el calculo
 #de su energía total inicial asi como su magnetizacion
 Spines = np.random.choice([-1,1], size=(N,N)).astype(np.float64)
+
+#Relajamos el sistema para que logre un estado de equilibrio a la temperatura inicial
+iterRelax = 0
+while True:
+    EvolucionIsingCy(Spines, T)
+    iterRelax += 1
+
+    if Spines.std() < 1e-3:
+        break
+    elif iterRelax == maxPasosRelax:
+        break
 SpinsPromedios = [Spines.mean()]
 Temperaturas = [T]
+
 
 #Creamos la ventana del widget GraphicsView
 pg.setConfigOption('background', "k")
@@ -114,7 +127,7 @@ def ActualizarSpines():
     TiempoTrans = TiempoAct - TiempoActualizar
     TiempoActualizar = TiempoAct
     transcurrido = transcurrido*0.9 + TiempoTrans*0.1
-    ventana.setWindowTitle("Simulación de modelo de Ising, FPS={0:.2f}".format(1.0/transcurrido))
+    ventana.setWindowTitle("Simulación de modelo de Ising, FPS={0:d}".format(int(1.0/transcurrido)))
     iter += 1
 
     if iter==2*Pasos-1:
