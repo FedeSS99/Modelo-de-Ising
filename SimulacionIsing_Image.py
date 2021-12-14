@@ -19,7 +19,8 @@ pg.setConfigOption('background', "k")
 pg.setConfigOption('foreground', "w")
 ventana = pg.GraphicsLayoutWidget(size=(1300,700))
 
-ventana.setWindowTitle(f"Simulación de modelo de Ising, FPS=0, T={T:.2f}")
+FPS=0
+ventana.setWindowTitle(f"Simulación de modelo de Ising, {FPS=}, {T=:.2f}")
 vista = ventana.addPlot(row=0, col=0, rowspan=2)
 vista.hideAxis("bottom")
 vista.hideAxis("left")
@@ -65,7 +66,8 @@ def ActualizarSpines():
     TiempoTrans = TiempoAct - TiempoActualizar
     TiempoActualizar = TiempoAct
     transcurrido = transcurrido*0.9 + TiempoTrans*0.1
-    ventana.setWindowTitle("Simulación de modelo de Ising, FPS={0:d}".format(int(1.0/transcurrido)))
+    FPS = int(1.0/transcurrido)
+    ventana.setWindowTitle(f"Simulación de modelo de Ising, {FPS=}, {T=:.2f}")
     iter += 1
 
 
